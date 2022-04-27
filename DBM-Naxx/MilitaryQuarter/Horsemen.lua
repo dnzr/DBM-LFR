@@ -28,6 +28,11 @@ local timerVoidZone			= mod:NewCDTimer(15, 36119)
 local timerMeteor			= mod:NewCDTimer(15, 28884)
 local timerHolyWrath			= mod:NewCDTimer(15, 57466)
 
+local timerMarkRivendare		= mod:NewCDTimer(12, 28834)
+local timerMarkBlaumeux			= mod:NewCDTimer(15, 28833)
+local timerMarkZeliek			= mod:NewCDTimer(15, 28835)
+local timerMarkKorthazz			= mod:NewCDTimer(12, 28832)
+
 local specWarnMarkOnPlayer	= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer", nil, false, true)
 
 mod:AddBoolOption("HealthFrame", true)
@@ -44,6 +49,8 @@ local markCounter = 0
 
 function mod:OnCombatStart(delay)
 	timerVoidZone:Start(16 - delay)
+	timerMarkRivendare:Start(24 - delay)
+	timerMarkBlaumeux:Start(24 - delay)
 	markCounter = 0
 	timerBlaumeux:Start(-delay)
 	timerRivendare:Start(-delay)
@@ -66,7 +73,9 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg:find(L.Yell1) then
 		timerKorthazz:Start()
+		timerMarkKorthazz:Start(24 - delay)
 		timerRivendare:Stop()
+		timerMarkRivendare:Stop()	
 		timerMeteor:Start(30)
 	elseif msg:find(L.Yell2) then
 		if mod:IsDifficulty("heroic10")	then
@@ -76,16 +85,20 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			DBM.RangeCheck:Show(12)
 		end
 		timerZeliek:Start()
+		timerMarkZeliek:Start(24 - delay)
 		timerHolyWrath:Start()
 		timerBlaumeux:Stop()
+		timerMarkBlaumeux:Stop()
 	elseif msg:find(L.Yell3) then
 		if self.Options.RangeFrame then
 			DBM.RangeCheck:Hide()
 		end
 		timerZeliek:Stop()
+		timerMarkZeliek:Stop()
 		timerHolyWrath:Stop()
 	elseif msg:find(L.Yell4) then
 		timerKorthazz:Stop()
+		timerMarkKorthazz:Stop()
 		timerMeteor:Stop()
 	end
 end
