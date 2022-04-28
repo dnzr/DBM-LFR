@@ -73,7 +73,7 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg:find(L.Yell1) then
 		timerKorthazz:Start()
-		timerMarkKorthazz:Start(24 - delay)
+		timerMarkKorthazz:Start(24)
 		timerRivendare:Stop()
 		timerMarkRivendare:Stop()	
 		timerMeteor:Start(30)
@@ -85,7 +85,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			DBM.RangeCheck:Show(12)
 		end
 		timerZeliek:Start()
-		timerMarkZeliek:Start(24 - delay)
+		timerMarkZeliek:Start(24)
 		timerHolyWrath:Start()
 		timerBlaumeux:Stop()
 		timerMarkBlaumeux:Stop()
