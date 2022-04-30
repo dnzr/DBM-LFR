@@ -20,8 +20,8 @@ local warnDecimateNow	= mod:NewSpellAnnounce(54426, 3)
 local specwarnFleshRip	= mod:NewSpecialWarning("SpecialWarningFleshRip")
 local warnFleshRip		= mod:NewTargetAnnounce(40199, 2)
 
-local enrageTimer		= mod:NewBerserkTimer(420)
-local timerDecimate		= mod:NewCDTimer(104, 54426, nil, nil, nil, 2)
+local enrageTimer		= mod:NewBerserkTimer(500)
+local timerDecimate		= mod:NewCDTimer(110, 54426, nil, nil, nil, 2)
 
 mod:AddBoolOption("SetIconOnFleshRipTarget", true)
 
