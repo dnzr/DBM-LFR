@@ -21,12 +21,13 @@ local warnFlameJetsCast			= mod:NewSpecialWarningCast(63472, "SpellCaster", nil,
 local warnFlameBrittle			= mod:NewSpecialWarningSwitch(62382, "Dps", nil, nil, 1, 2)
 
 local timerFlameJetsCast		= mod:NewCastTimer(2.7, 63472)
-local timerActivateConstruct	= mod:NewCDCountTimer(30, 62488, nil, nil, nil, 1)
-local timerFlameJetsCooldown	= mod:NewCDTimer(42, 63472, nil, nil, nil, 2)
+local timerActivateConstruct		= mod:NewCDCountTimer(30, 62488, nil, nil, nil, 1)
+local timerFlameJetsCooldown		= mod:NewCDTimer(42, 63472, nil, nil, nil, 2)
 local timerScorchCooldown		= mod:NewCDTimer(25, 63473, nil, nil, nil, 5)
 local timerScorchCast			= mod:NewCastTimer(3, 63473)
-local timerSlagPot				= mod:NewTargetTimer(10, 63477, nil, nil, nil, 3)
-local timerAchieve				= mod:NewAchievementTimer(240, 2930)
+local timerSlagPot			= mod:NewTargetTimer(10, 63477, nil, nil, nil, 3)
+local timerAchieve			= mod:NewAchievementTimer(240, 2930)
+local enrageTimer			= mod:NewBerserkTimer(480)
 
 mod.vb.ConstructCount = 0
 
@@ -35,6 +36,7 @@ mod:AddSetIconOption("SlagPotIcon", 63477, false, false, {8})
 function mod:OnCombatStart(delay)
 	self.vb.ConstructCount = 0
 	timerAchieve:Start()
+	enrageTimer:Start()
 	if self:IsDifficulty("normal10") then
 		timerActivateConstruct:Start(40-delay, self.vb.ConstructCount)
 	else
