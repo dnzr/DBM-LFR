@@ -29,8 +29,8 @@ local timerMeteor			= mod:NewCDTimer(15, 28884)
 local timerHolyWrath			= mod:NewCDTimer(15, 57466)
 
 local timerMarkRivendare		= mod:NewCDTimer(12, 28834)
-local timerMarkBlaumeux			= mod:NewCDTimer(15, 28833)
-local timerMarkZeliek			= mod:NewCDTimer(15, 28835)
+local timerMarkBlaumeux			= mod:NewCDTimer(12, 28833)
+local timerMarkZeliek			= mod:NewCDTimer(12, 28835)
 local timerMarkKorthazz			= mod:NewCDTimer(12, 28832)
 
 local specWarnMarkOnPlayer	= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer", nil, false, true)
