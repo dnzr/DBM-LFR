@@ -21,13 +21,15 @@ local warningLocustFaded	= mod:NewAnnounce("WarningLocustFaded", 1, 28785)
 
 local specialWarningLocust	= mod:NewSpecialWarning("SpecialLocust")
 
-local timerLocustIn			= mod:NewCDTimer(80, 28785)
+local timerLocustIn		= mod:NewCDTimer(80, 28785)
 local timerLocustFade 		= mod:NewBuffActiveTimer(26, 28785)
+local enrageTimer		= mod:NewBerserkTimer(600)
 
 mod:AddBoolOption("ArachnophobiaTimer", true, "timer")
 
 
 function mod:OnCombatStart(delay)
+	enrageTimer:Start()
 	if (mod:IsDifficulty("heroic25") or mod:IsDifficulty("normal25")) then
 		timerLocustIn:Start(100 - delay)
 		warningLocustSoon:Schedule(95 - delay)

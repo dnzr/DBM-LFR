@@ -29,11 +29,12 @@ local warnFrostrain		= mod:NewSpecialWarningMove(55699)
 
 mod:AddBoolOption("WarningIceblock", true, "yell")
 
-local timerDrainLife	= mod:NewCDTimer(22, 28542)
+local timerDrainLife		= mod:NewCDTimer(22, 28542)
 local timerAirPhase		= mod:NewTimer(66, "TimerAir", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendUnBurrow.blp")
 local timerLanding		= mod:NewTimer(28.5, "TimerLanding", "Interface\\AddOns\\DBM-Core\\textures\\CryptFiendBurrow.blp")
 local timerIceBlast		= mod:NewTimer(8.2, "TimerIceBlast", 15876)
-local timerFrozenOrb 	= mod:NewTimer(30, "TimerFrozenOrb", 72081)
+local timerFrozenOrb 		= mod:NewTimer(30, "TimerFrozenOrb", 72081)
+local enrageTimer		= mod:NewBerserkTimer(780)
 
 local noTargetTime = 0
 local isFlying = false
@@ -46,6 +47,7 @@ function mod:OnCombatStart(delay)
 	if (mod:IsDifficulty("heroic25") or mod:IsDifficulty("normal25")) then
 		timerFrozenOrb:Start(-delay)
 		warnFrozenOrb:Schedule(30 - delay)
+		enrageTimer:Start()
 	end
 	noTargetTime = 0
 	isFlying = false

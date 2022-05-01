@@ -20,8 +20,8 @@ local warnDecimateNow	= mod:NewSpellAnnounce(54426, 3)
 local specwarnFleshRip	= mod:NewSpecialWarning("SpecialWarningFleshRip")
 local warnFleshRip		= mod:NewTargetAnnounce(40199, 2)
 
-local enrageTimer		= mod:NewBerserkTimer(420)
-local timerDecimate		= mod:NewCDTimer(104, 54426, nil, nil, nil, 2)
+local enrageTimer		= mod:NewBerserkTimer(500)
+local timerDecimate		= mod:NewCDTimer(110, 54426, nil, nil, nil, 2)
 
 mod:AddBoolOption("SetIconOnFleshRipTarget", true)
 
@@ -48,9 +48,9 @@ function mod:OnCombatStart(delay)
 	warnDecimateSoon:Schedule(100 - delay)
 
 	if (mod:IsDifficulty("heroic25") or mod:IsDifficulty("normal25")) then
-	  enrageTimer:Start(480 - delay)
+	  enrageTimer:Start(500 - delay)
 	else
-	  enrageTimer:Start(420 - delay)
+	  enrageTimer:Start(500 - delay)
 	end
 end
 
@@ -58,7 +58,7 @@ function mod:SPELL_DAMAGE(_, _, _, _, _, _, spellId)
 	if spellId == 28375 and self:AntiSpam(20) then
 		warnDecimateNow:Show()
 		timerDecimate:Start()
-		warnDecimateSoon:Schedule(96)
+		warnDecimateSoon:Schedule(110)
 	end
 end
 

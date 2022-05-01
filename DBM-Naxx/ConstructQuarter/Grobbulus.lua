@@ -17,12 +17,12 @@ mod:RegisterEvents(
 
 local warnInjection		= mod:NewTargetAnnounce(28169, 2)
 local warnCloud			= mod:NewSpellAnnounce(28240, 2)
-local warnFalloutSlime	= mod:NewAnnounce("WarningFalloutSlime", 4, 54364)
+local warnFalloutSlime		= mod:NewAnnounce("WarningFalloutSlime", 4, 54364)
 
-local specWarnInjection	= mod:NewSpecialWarning("SpecialWarningInjection")
+local specWarnInjection		= mod:NewSpecialWarning("SpecialWarningInjection")
 local yellInjection		= mod:NewYellMe(28169, nil, false)
 
-local timerInjection	= mod:NewTargetTimer(10, 28169)
+local timerInjection		= mod:NewTargetTimer(10, 28169)
 local timerCloud		= mod:NewNextTimer(15, 28240)
 local soundCloud		= mod:NewSound3(28240, nil, mod:IsMelee() or mod:IsTank())
 local enrageTimer		= mod:NewBerserkTimer(720)
