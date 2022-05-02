@@ -36,7 +36,7 @@ local timerTurret1				= mod:NewTimer(53, "timerTurret1", 48642, nil, nil, 5)
 local timerTurret2				= mod:NewTimer(75, "timerTurret2", 48642, nil, nil, 5)
 local timerTurret3				= mod:NewTimer(95, "timerTurret3", 48642, nil, nil, 5)
 local timerTurret4				= mod:NewTimer(117, "timerTurret4", 48642, nil, nil, 5)
-local timerGrounded				= mod:NewTimer(45, "timerGrounded", nil, nil, nil, 6)
+local timerGrounded				= mod:NewTimer(38, "timerGrounded", nil, nil, nil, 6)
 local timerFuseArmorCD				= mod:NewCDTimer(12.1, 64771, nil, "Tank", nil, 5, nil, DBM_CORE_L.TANK_ICON)
 
 local combattime = 0
@@ -143,10 +143,10 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, mob)
 	if isGrounded and (msg == L.YellAir or msg == L.YellAir2) and GetTime() - combattime > 30 then
 		isGrounded = false -- warmane resets the timers idk why
 		if self:IsDifficulty("normal10") then -- not sure?
-			warnTurretsReadySoon:Schedule(23)
-			warnTurretsReady:Schedule(43)
-			timerTurret1:Start(23)
-			timerTurret2:Start(43)
+			warnTurretsReadySoon:Schedule(65)
+			warnTurretsReady:Schedule(75)
+			timerTurret1:Start(53)
+			timerTurret2:Start(75)
 		else
 			warnTurretsReadySoon:Schedule(123)
 			warnTurretsReady:Schedule(133)
