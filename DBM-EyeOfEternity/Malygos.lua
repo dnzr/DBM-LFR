@@ -50,7 +50,7 @@ end
 
 function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
-	breathTimer(-delay)
+	breathTimer:Start(-delay)
 	timerAchieve:Start(-delay)
 	timerVortexCD:Start(30 - delay)
 	warnVortexSoon:Schedule(25 - delay)
