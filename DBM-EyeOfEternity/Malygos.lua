@@ -29,7 +29,7 @@ local specWarnStaticFieldNear			= mod:NewSpecialWarningClose(57430, nil, nil, ni
 local yellStaticField				= mod:NewYellMe(57430)
 
 local enrageTimer				= mod:NewBerserkTimer(600)
-local breathTimer				= mod:NewTimer(20, 56272)
+local breathTimer 				= mod:NewTimer(20, 56272)
 local timerSpark				= mod:NewTimer(30, "TimerSpark", 59381)
 local timerVortex				= mod:NewCastTimer(11, 56105)
 local timerVortexCD				= mod:NewNextTimer(60, 56105)
@@ -50,6 +50,7 @@ end
 
 function mod:OnCombatStart(delay)
 	enrageTimer:Start(-delay)
+	breathTimer:Start(-delay)
 	timerAchieve:Start(-delay)
 	timerVortexCD:Start(30 - delay)
 	warnVortexSoon:Schedule(25 - delay)
@@ -76,6 +77,9 @@ function mod:SPELL_CAST_SUCCESS(args)
 		timerVortex:Start()
 		if timerSpark:GetTime() < 11 and timerSpark:IsStarted() then
 			timerSpark:Update(18, 30)
+		end
+	if breathTimer:GetTime() = 0 and breathTimer:IsStarted() then
+			breathTimer:Update(20)
 		end
 	elseif args:IsSpellID(57430) then
 		self:ScheduleMethod(0.1, "StaticFieldTarget")
@@ -169,6 +173,9 @@ function mod:SPELL_AURA_APPLIED(args)
 		if timerSpark:GetTime() < 11 and timerSpark:IsStarted() then
 			timerSpark:Update(18, 30)
 		end
+		if breathTimer:GetTime() = 0 and breathTimer:IsStarted() then
+			breathTimer:Update(20)
+		end
 	end
 end
 
@@ -182,6 +189,7 @@ function mod:OnSync(event, arg)
 		warnPhase2:Show()
 		timerIntermission:Start()
 		timerBreath:Start(60)
+		breathTimer:Stop()
 	elseif event == "Breath" then
 		warnBreath:Schedule(1)
 	elseif event == "BreathSoon" then
