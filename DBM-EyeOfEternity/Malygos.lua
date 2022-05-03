@@ -78,9 +78,6 @@ function mod:SPELL_CAST_SUCCESS(args)
 		if timerSpark:GetTime() < 11 and timerSpark:IsStarted() then
 			timerSpark:Update(18, 30)
 		end
-	if breathTimer:GetTime() = 0 and breathTimer:IsStarted() then
-			breathTimer:Update(20)
-		end
 	elseif args:IsSpellID(57430) then
 		self:ScheduleMethod(0.1, "StaticFieldTarget")
 		--warnStaticField:Show()
@@ -172,9 +169,6 @@ function mod:SPELL_AURA_APPLIED(args)
 		timerVortex:Start()
 		if timerSpark:GetTime() < 11 and timerSpark:IsStarted() then
 			timerSpark:Update(18, 30)
-		end
-		if breathTimer:GetTime() = 0 and breathTimer:IsStarted() then
-			breathTimer:Update(20)
 		end
 	end
 end
