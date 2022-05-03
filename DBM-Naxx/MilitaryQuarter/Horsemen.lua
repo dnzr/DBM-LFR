@@ -11,6 +11,7 @@ mod:EnableModel()
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCEEDED",
 	"SPELL_AURA_APPLIED_DOSE",
+	"SPELL_AURA_APPLIED",
 	"CHAT_MSG_MONSTER_YELL",
 	"SPELL_SUMMON",
 	"SPELL_CAST_START",
@@ -76,7 +77,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 		timerMarkKorthazz:Start(33)
 		timerRivendare:Stop()
 		timerMarkRivendare:Stop()	
-		timerMeteor:Start(30)
+		timerMeteor:Start(19) -- 19 = 9 Seconds run time to place and meteor can come between 10 and 25 seconds
 	elseif msg:find(L.Yell2) then
 		if mod:IsDifficulty("heroic10")	then
 			timerVoidZone:Stop()
@@ -123,26 +124,14 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
-function mod:SPELL_CAST_START(args)
+function mod:SPELL_AURA_APPLIED(args) -- Checks for Marks applied and starts timer
 	if args:IsSpellID(28834) then
 		timerMarkRivendare:Start()
-	end
-end
-
-function mod:SPELL_CAST_START(args)
-	if args:IsSpellID(28833) then
+	elseif args:IsSpellID(28833) then
 		timerMarkBlaumeux:Start()
-	end
-end
-
-function mod:SPELL_CAST_START(args)
-	if args:IsSpellID(28832) then
+	elseif args:IsSpellID(28832) then
 		timerMarkKorthazz:Start()
-	end
-end
-
-function mod:SPELL_CAST_START(args)
-	if args:IsSpellID(28835) then
+	elseif args:IsSpellID(28835) then
 		timerMarkZeliek:Start()
 	end
 end
