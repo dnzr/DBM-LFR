@@ -11,29 +11,30 @@ mod:EnableModel()
 mod:RegisterEvents(
 	"SPELL_CAST_SUCCEEDED",
 	"SPELL_AURA_APPLIED_DOSE",
+	"SPELL_AURA_APPLIED",
 	"CHAT_MSG_MONSTER_YELL",
 	"SPELL_SUMMON",
 	"SPELL_CAST_START",
 	"SPELL_DAMAGE"
 )
 
-local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
-local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
+local warnMarkSoon				= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
+local warnMarkNow				= mod:NewAnnounce("WarningMarkNow", 2, 28835)
 
-local timerBlaumeux			= mod:NewTimer(309, "TimerLadyBlaumeuxEnrage", 72143)
-local timerZeliek			= mod:NewTimer(309, "TimerSirZeliekEnrage", 72143)
-local timerKorthazz			= mod:NewTimer(309, "TimerThaneKorthazzEnrage", 72143)
+local timerBlaumeux				= mod:NewTimer(309, "TimerLadyBlaumeuxEnrage", 72143)
+local timerZeliek				= mod:NewTimer(309, "TimerSirZeliekEnrage", 72143)
+local timerKorthazz				= mod:NewTimer(309, "TimerThaneKorthazzEnrage", 72143)
 local timerRivendare			= mod:NewTimer(309, "TimerBaronRivendareEnrage", 72143)
-local timerVoidZone			= mod:NewCDTimer(5, 36119)
-local timerMeteor			= mod:NewCDTimer(10, 28884)
-local timerHolyWrath			= mod:NewCDTimer(13, 57466)
+local timerVoidZone				= mod:NewCDTimer(12, 36119)
+local timerMeteor				= mod:NewCDTimer(13, 28884)
+local timerHolyWrath			= mod:NewCDTimer(10, 57466)
 
 local timerMarkRivendare		= mod:NewCDTimer(12, 28834)
 local timerMarkBlaumeux			= mod:NewCDTimer(12, 28833)
 local timerMarkZeliek			= mod:NewCDTimer(12, 28835)
 local timerMarkKorthazz			= mod:NewCDTimer(12, 28832)
 
-local specWarnMarkOnPlayer	= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer", nil, false, true)
+local specWarnMarkOnPlayer		= mod:NewSpecialWarning("SpecialWarningMarkOnPlayer", nil, false, true)
 
 mod:AddBoolOption("HealthFrame", true)
 mod:AddBoolOption("RangeFrame")
@@ -48,9 +49,9 @@ mod:SetBossHealthInfo(
 local markCounter = 0
 
 function mod:OnCombatStart(delay)
-	timerVoidZone:Start(16 - delay)
-	timerMarkRivendare:Start(24 - delay)
-	timerMarkBlaumeux:Start(24 - delay)
+	timerVoidZone:Start(14 - delay)
+	timerMarkRivendare:Start(33 - delay)
+	timerMarkBlaumeux:Start(33 - delay)
 	markCounter = 0
 	timerBlaumeux:Start(-delay)
 	timerRivendare:Start(-delay)
@@ -73,10 +74,10 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg:find(L.Yell1) then
 		timerKorthazz:Start()
-		timerMarkKorthazz:Start(24)
+		timerMarkKorthazz:Start(33)
 		timerRivendare:Stop()
 		timerMarkRivendare:Stop()	
-		timerMeteor:Start(30)
+		timerMeteor:Start(19) -- 19 = 9 Seconds run time to place and meteor can come between 10 and 25 seconds
 	elseif msg:find(L.Yell2) then
 		if mod:IsDifficulty("heroic10")	then
 			timerVoidZone:Stop()
@@ -85,8 +86,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			DBM.RangeCheck:Show(12)
 		end
 		timerZeliek:Start()
-		timerMarkZeliek:Start(24)
-		timerHolyWrath:Start()
+		timerMarkZeliek:Start(33)
+		timerHolyWrath:Start(22)
 		timerBlaumeux:Stop()
 		timerMarkBlaumeux:Stop()
 	elseif msg:find(L.Yell3) then
@@ -109,6 +110,15 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 			specWarnMarkOnPlayer:Show(args.spellName, args.amount)
 		end
 	end
+	if args:IsSpellID(28834) then
+		timerMarkRivendare:Start()
+	elseif args:IsSpellID(28833) then
+		timerMarkBlaumeux:Start()
+	elseif args:IsSpellID(28832) then
+		timerMarkKorthazz:Start()
+	elseif args:IsSpellID(28835) then
+		timerMarkZeliek:Start()
+	end
 end
 
 function mod:SPELL_SUMMON(args)
@@ -120,6 +130,18 @@ end
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(28884, 57467) then
 		timerMeteor:Start()
+	end
+end
+
+function mod:SPELL_AURA_APPLIED(args) -- Checks for Marks applied and starts timer
+	if args:IsSpellID(28834) then
+		timerMarkRivendare:Start()
+	elseif args:IsSpellID(28833) then
+		timerMarkBlaumeux:Start()
+	elseif args:IsSpellID(28832) then
+		timerMarkKorthazz:Start()
+	elseif args:IsSpellID(28835) then
+		timerMarkZeliek:Start()
 	end
 end
 
