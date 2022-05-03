@@ -15,10 +15,14 @@ mod:RegisterEvents(
 	"CHAT_MSG_MONSTER_YELL",
 	"SPELL_SUMMON",
 	"SPELL_CAST_START",
-	"SPELL_DAMAGE"
+	"SPELL_DAMAGE 36121"
 )
 
 local specWarnVoidZone			= mod:NewSpecialWarningMove(36121, nil, nil, nil, 1, 2)
+
+
+local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
+local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
 
 local warnMarkSoon				= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow				= mod:NewAnnounce("WarningMarkNow", 2, 28835)
@@ -136,11 +140,6 @@ function mod:SPELL_CAST_START(args)
 end
 
 function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
-	if (spellId == 28883 or spellId == 57466) then
-		if (mod:IsDifficulty("heroic25") or mod:IsDifficulty("normal25")) then
-			timerHolyWrath:Start()
-		end
-	end
 	if spellId == 36121 and destGUID == UnitGUID("player") and self:AntiSpam() then
 		specWarnVoidZone:Show()
 		specWarnVoidZone:Play("runaway")
