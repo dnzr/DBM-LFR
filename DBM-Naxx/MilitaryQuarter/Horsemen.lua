@@ -20,6 +20,7 @@ mod:RegisterEvents(
 
 local specWarnVoidZone			= mod:NewSpecialWarningMove(36121, nil, nil, nil, 1, 2)
 
+
 local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
 
