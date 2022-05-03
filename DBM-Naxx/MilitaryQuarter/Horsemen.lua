@@ -17,6 +17,8 @@ mod:RegisterEvents(
 	"SPELL_DAMAGE"
 )
 
+local specWarnVoidZone			= mod:NewSpecialWarningMove(36121, nil, nil, nil, 1, 2)
+
 local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
 
@@ -128,6 +130,13 @@ function mod:SPELL_DAMAGE(_, _, _, _, _, _, spellId)
 		if (mod:IsDifficulty("heroic25") or mod:IsDifficulty("normal25")) then
 			timerHolyWrath:Start()
 		end
+	end
+end
+
+function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
+	if spellId == 36121 and destGUID == UnitGUID("player") and self:AntiSpam() then
+		specWarnVoidZone:Show()
+		specWarnVoidZone:Play("runaway")
 	end
 end
 
