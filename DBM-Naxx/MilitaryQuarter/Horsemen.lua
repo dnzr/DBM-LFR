@@ -48,9 +48,9 @@ mod:SetBossHealthInfo(
 local markCounter = 0
 
 function mod:OnCombatStart(delay)
-	timerVoidZone:Start(16 - delay)
-	timerMarkRivendare:Start(24 - delay)
-	timerMarkBlaumeux:Start(24 - delay)
+	timerVoidZone:Start(14 - delay)
+	timerMarkRivendare:Start(33 - delay)
+	timerMarkBlaumeux:Start(33 - delay)
 	markCounter = 0
 	timerBlaumeux:Start(-delay)
 	timerRivendare:Start(-delay)
@@ -73,7 +73,7 @@ end
 function mod:CHAT_MSG_MONSTER_YELL(msg)
 	if msg:find(L.Yell1) then
 		timerKorthazz:Start()
-		timerMarkKorthazz:Start(24)
+		timerMarkKorthazz:Start(33)
 		timerRivendare:Stop()
 		timerMarkRivendare:Stop()	
 		timerMeteor:Start(30)
@@ -85,7 +85,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			DBM.RangeCheck:Show(12)
 		end
 		timerZeliek:Start()
-		timerMarkZeliek:Start(24)
+		timerMarkZeliek:Start()
 		timerHolyWrath:Start()
 		timerBlaumeux:Stop()
 		timerMarkBlaumeux:Stop()
@@ -120,6 +120,30 @@ end
 function mod:SPELL_CAST_START(args)
 	if args:IsSpellID(28884, 57467) then
 		timerMeteor:Start()
+	end
+end
+
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(28834) then
+		timerMarkRivendare:Start()
+	end
+end
+
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(28833) then
+		timerMarkBlaumeux:Start()
+	end
+end
+
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(28832) then
+		timerMarkKorthazz:Start()
+	end
+end
+
+function mod:SPELL_CAST_START(args)
+	if args:IsSpellID(28835) then
+		timerMarkZeliek:Start()
 	end
 end
 
