@@ -18,15 +18,10 @@ mod:RegisterEvents(
 	"SPELL_DAMAGE"
 )
 
-<<<<<<< HEAD
 local specWarnVoidZone			= mod:NewSpecialWarningMove(36121, nil, nil, nil, 1, 2)
 
 local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
-=======
-local warnMarkSoon				= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
-local warnMarkNow				= mod:NewAnnounce("WarningMarkNow", 2, 28835)
->>>>>>> 2a9d0e3d7a9ce9bef482311438b37f46d60f1a79
 
 local timerBlaumeux				= mod:NewTimer(309, "TimerLadyBlaumeuxEnrage", 72143)
 local timerZeliek				= mod:NewTimer(309, "TimerSirZeliekEnrage", 72143)
@@ -140,27 +135,12 @@ function mod:SPELL_CAST_START(args)
 	end
 end
 
-function mod:SPELL_AURA_APPLIED(args) -- Checks for Marks applied and starts timer
-	if args:IsSpellID(28834) then
-		timerMarkRivendare:Start()
-	elseif args:IsSpellID(28833) then
-		timerMarkBlaumeux:Start()
-	elseif args:IsSpellID(28832) then
-		timerMarkKorthazz:Start()
-	elseif args:IsSpellID(28835) then
-		timerMarkZeliek:Start()
-	end
-end
-
-function mod:SPELL_DAMAGE(_, _, _, _, _, _, spellId)
+function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 	if (spellId == 28883 or spellId == 57466) then
 		if (mod:IsDifficulty("heroic25") or mod:IsDifficulty("normal25")) then
 			timerHolyWrath:Start()
 		end
 	end
-end
-
-function mod:SPELL_DAMAGE(_, _, _, destGUID, _, _, spellId)
 	if spellId == 36121 and destGUID == UnitGUID("player") and self:AntiSpam() then
 		specWarnVoidZone:Show()
 		specWarnVoidZone:Play("runaway")
