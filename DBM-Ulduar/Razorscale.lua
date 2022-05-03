@@ -17,27 +17,27 @@ mod:RegisterEventsInCombat(
 	"UNIT_SPELLCAST_SUCCEEDED boss1"
 )
 
-local warnTurretsReadySoon			= mod:NewAnnounce("warnTurretsReadySoon", 1, 48642)
-local warnTurretsReady				= mod:NewAnnounce("warnTurretsReady", 3, 48642)
-local warnFlame					= mod:NewTargetAnnounce(62660, 2, nil, false)
-local warnFuseArmor				= mod:NewStackAnnounce(64771, 2, nil, "Tank")
+local warnTurretsReadySoon				= mod:NewAnnounce("warnTurretsReadySoon", 1, 48642)
+local warnTurretsReady					= mod:NewAnnounce("warnTurretsReady", 3, 48642)
+local warnFlame							= mod:NewTargetAnnounce(62660, 2, nil, false)
+local warnFuseArmor						= mod:NewStackAnnounce(64771, 2, nil, "Tank")
 
 local specWarnDevouringFlame			= mod:NewSpecialWarningMove(64733, nil, nil, nil, 1, 2)
 local specWarnDevouringFlameYou			= mod:NewSpecialWarningYou(64733, false, nil, nil, 1, 2)
 local specWarnDevouringFlameNear		= mod:NewSpecialWarningClose(64733, false, nil, nil, 1, 2)
-local yellDevouringFlame			= mod:NewYell(64733)
-local specWarnFuseArmor				= mod:NewSpecialWarningStack(64771, nil, 2, nil, nil, 1, 6)
+local yellDevouringFlame				= mod:NewYell(64733)
+local specWarnFuseArmor					= mod:NewSpecialWarningStack(64771, nil, 2, nil, nil, 1, 6)
 local specWarnFuseArmorOther			= mod:NewSpecialWarningTaunt(64771, nil, nil, nil, 1, 2)
 
-local enrageTimer				= mod:NewBerserkTimer(900)
+local enrageTimer						= mod:NewBerserkTimer(900)
 local timerDeepBreathCooldown			= mod:NewCDTimer(21, 64021, nil, nil, nil, 5)
-local timerDeepBreathCast			= mod:NewCastTimer(2.5, 64021)
-local timerTurret1				= mod:NewTimer(50, "timerTurret1", 48642, nil, nil, 5)
-local timerTurret2				= mod:NewTimer(70, "timerTurret2", 48642, nil, nil, 5)
-local timerTurret3				= mod:NewTimer(90, "timerTurret3", 48642, nil, nil, 5)
-local timerTurret4				= mod:NewTimer(110, "timerTurret4", 48642, nil, nil, 5)
-local timerGrounded				= mod:NewTimer(38, "timerGrounded", nil, nil, nil, 6)
-local timerFuseArmorCD				= mod:NewCDTimer(12.1, 64771, nil, "Tank", nil, 5, nil, DBM_CORE_L.TANK_ICON)
+local timerDeepBreathCast				= mod:NewCastTimer(2.5, 64021)
+local timerTurret1						= mod:NewTimer(50, "timerTurret1", 48642, nil, nil, 5)
+local timerTurret2						= mod:NewTimer(70, "timerTurret2", 48642, nil, nil, 5)
+local timerTurret3						= mod:NewTimer(90, "timerTurret3", 48642, nil, nil, 5)
+local timerTurret4						= mod:NewTimer(110, "timerTurret4", 48642, nil, nil, 5)
+local timerGrounded						= mod:NewTimer(38, "timerGrounded", nil, nil, nil, 6)
+local timerFuseArmorCD					= mod:NewCDTimer(12.1, 64771, nil, "Tank", nil, 5, nil, DBM_CORE_L.TANK_ICON)
 
 local combattime = 0
 local isGrounded = false
@@ -145,8 +145,8 @@ function mod:CHAT_MSG_MONSTER_YELL(msg, mob)
 		if self:IsDifficulty("normal10") then -- not sure?
 			warnTurretsReadySoon:Schedule(65)
 			warnTurretsReady:Schedule(75)
-			timerTurret1:Start(53)
-			timerTurret2:Start(75)
+			timerTurret1:Start(52)
+			timerTurret2:Start(71)
 		else
 			warnTurretsReadySoon:Schedule(123)
 			warnTurretsReady:Schedule(133)
