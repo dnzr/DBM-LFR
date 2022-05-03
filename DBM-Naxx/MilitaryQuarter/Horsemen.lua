@@ -110,6 +110,15 @@ function mod:SPELL_AURA_APPLIED_DOSE(args)
 			specWarnMarkOnPlayer:Show(args.spellName, args.amount)
 		end
 	end
+	if args:IsSpellID(28834) then
+		timerMarkRivendare:Start()
+	elseif args:IsSpellID(28833) then
+		timerMarkBlaumeux:Start()
+	elseif args:IsSpellID(28832) then
+		timerMarkKorthazz:Start()
+	elseif args:IsSpellID(28835) then
+		timerMarkZeliek:Start()
+	end
 end
 
 function mod:SPELL_SUMMON(args)
