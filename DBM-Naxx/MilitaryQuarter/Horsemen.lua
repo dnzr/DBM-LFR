@@ -23,6 +23,9 @@ local specWarnVoidZone			= mod:NewSpecialWarningMove(36121, nil, nil, nil, 1, 2)
 local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
 
+local warnMarkSoon				= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
+local warnMarkNow				= mod:NewAnnounce("WarningMarkNow", 2, 28835)
+
 local timerBlaumeux				= mod:NewTimer(309, "TimerLadyBlaumeuxEnrage", 72143)
 local timerZeliek				= mod:NewTimer(309, "TimerSirZeliekEnrage", 72143)
 local timerKorthazz				= mod:NewTimer(309, "TimerThaneKorthazzEnrage", 72143)
