@@ -86,7 +86,7 @@ function mod:CHAT_MSG_MONSTER_YELL(msg)
 			DBM.RangeCheck:Show(12)
 		end
 		timerZeliek:Start()
-		timerMarkZeliek:Start()
+		timerMarkZeliek:Start(33)
 		timerHolyWrath:Start()
 		timerBlaumeux:Stop()
 		timerMarkBlaumeux:Stop()
