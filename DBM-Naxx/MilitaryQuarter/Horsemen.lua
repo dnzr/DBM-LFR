@@ -18,8 +18,14 @@ mod:RegisterEvents(
 	"SPELL_DAMAGE"
 )
 
+<<<<<<< HEAD
+
+local warnMarkSoon			= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
+local warnMarkNow			= mod:NewAnnounce("WarningMarkNow", 2, 28835)
+=======
 local warnMarkSoon				= mod:NewAnnounce("WarningMarkSoon", 1, 28835, false)
 local warnMarkNow				= mod:NewAnnounce("WarningMarkNow", 2, 28835)
+>>>>>>> 2a9d0e3d7a9ce9bef482311438b37f46d60f1a79
 
 local timerBlaumeux				= mod:NewTimer(309, "TimerLadyBlaumeuxEnrage", 72143)
 local timerZeliek				= mod:NewTimer(309, "TimerSirZeliekEnrage", 72143)
@@ -152,7 +158,6 @@ function mod:SPELL_DAMAGE(_, _, _, _, _, _, spellId)
 		end
 	end
 end
-
 
 function mod:OnCombatEnd()
 	if self.Options.RangeFrame then
